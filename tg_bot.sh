@@ -24,7 +24,6 @@ while true; do
   updates=$(fetch_updates)
   if [ -n "${updates}" ]; then
     for update in ${updates}; do
-      CHAT_ID=$(echo "${update}" | jq '.message.chat.id')
       MESSAGE=$(echo "${update}" | jq -r '.message.text')
       UPDATE_ID=$(echo "${update}" | jq '.update_id')
 
