@@ -18,10 +18,7 @@ fetch_updates() {
   local response=$(curl -s "https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${OFFSET}")
   echo "${response}" | jq -c '.result[]'
 }
-
-STATUS=$(uptime)
-send_message "${CHAT_ID}" "🟢OpenWRT Status: ${STATUS}"
-        
+       
 # Main Loop to Handle Commands
 while true; do
   updates=$(fetch_updates)
