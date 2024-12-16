@@ -56,7 +56,7 @@ while true; do
         $(uci set firewall.@redirect[0].enabled='0')
         $(uci commit firewall
         $(/etc/init.d/firewall restart)
-        send_message "${CHAT_ID}" "✅web interface closed"
+        send_message "${CHAT_ID}" "❌web interface closed"
       else
         send_message "${CHAT_ID}" "Unknown Command. Try /status or /ip."
       fi
