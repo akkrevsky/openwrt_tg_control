@@ -21,7 +21,7 @@ Steps:
    ```bash
    chmod +x /root/tg_bot.sh
    ```
-8. Change <bot_token> <chat_id> in tg_bot.sh
+8. Change <bot_token> <chat_id> and last number is update interval (default 4 sec) in tg_bot.sh
 9. Add script to autorun /etc/rc.local
    ```
    #!/bin/sh
