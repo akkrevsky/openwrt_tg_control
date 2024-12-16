@@ -44,9 +44,6 @@ while true; do
       elif [ "${MESSAGE}" = "/ml_server_cancel" ]; then
         $(sshpass -p "iamfriend" ssh -y sp@192.168.31.181 "shutdown.exe /a")
         send_message "${CHAT_ID}" "✅cancel shutdown ml_server"
-      elif [ "${MESSAGE}" = "/reboot" ]; then
-        send_message "${CHAT_ID}" "🔄reboot system"
-        $(reboot)
       elif [ "${MESSAGE}" = "/web_open" ]; then
         $(uci set firewall.@redirect[0].enabled='1')
         $(uci commit firewall)
