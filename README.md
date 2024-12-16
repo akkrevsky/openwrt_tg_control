@@ -34,4 +34,4 @@ Steps:
 
 TODO: 
    - get all information about all nodes in network
-   - add command to switch http luci-interface to external network
+   - add startups message
