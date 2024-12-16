@@ -21,7 +21,8 @@ Steps:
    ```bash
    chmod +x /root/tg_bot.sh
    ```
-8. Add script to autorun /etc/rc.local
+8. Change <bot_token> <chat_id> in tg_bot.sh
+9. Add script to autorun /etc/rc.local
    ```
    #!/bin/sh
    echo "tg_bot" > /tmp/startup.log
@@ -29,4 +30,8 @@ Steps:
 
    exit 0
    ```
-9. clear log (reboot or auto-script)
+10. Сlear log (reboot or auto-script)
+
+TODO: 
+   - get all information about all nodes in network
+   - add command to switch http luci-interface to external network
