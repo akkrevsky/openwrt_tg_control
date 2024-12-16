@@ -49,7 +49,7 @@ while true; do
         send_message "${CHAT_ID}" "✅cancel shutdown ml_server"
       elif [ "${MESSAGE}" = "/reboot" ]; then
         send_message "${CHAT_ID}" "🔄reboot system"
-        $(reboot")
+        $(reboot)
       elif [ "${MESSAGE}" = "/web_open" ]; then
         $(uci set firewall.@redirect[0].enabled='1')
         $(uci commit firewall)
