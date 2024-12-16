@@ -19,6 +19,9 @@ fetch_updates() {
   echo "${response}" | jq -c '.result[]'
 }
 
+STATUS=$(uptime)
+send_message "${CHAT_ID}" "🟢OpenWRT Status: ${STATUS}"
+        
 # Main Loop to Handle Commands
 while true; do
   updates=$(fetch_updates)
@@ -49,12 +52,12 @@ while true; do
         $(reboot")
       elif [ "${MESSAGE}" = "/web_open" ]; then
         $(uci set firewall.@redirect[0].enabled='1')
-        $(uci commit firewall
+        $(uci commit firewall)
         $(/etc/init.d/firewall restart)
         send_message "${CHAT_ID}" "✅web interface opened through internet"
       elif [ "${MESSAGE}" = "/web_close" ]; then
         $(uci set firewall.@redirect[0].enabled='0')
-        $(uci commit firewall
+        $(uci commit firewall)
         $(/etc/init.d/firewall restart)
         send_message "${CHAT_ID}" "❌web interface closed"
       else
