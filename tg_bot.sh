@@ -31,19 +31,32 @@ while true; do
       # Respond to Commands
       if [ "${MESSAGE}" = "/status" ]; then
         STATUS=$(uptime)
-        send_message "${CHAT_ID}" "....OpenWRT Status: ${STATUS}"
+        send_message "${CHAT_ID}" "🟢OpenWRT Status: ${STATUS}"
       elif [ "${MESSAGE}" = "/ip" ]; then
         IP=$(curl -s -4 ifconfig.me)
-        send_message "${CHAT_ID}" "...Router Public IP: ${IP}"
+        send_message "${CHAT_ID}" "✅Router Public IP: ${IP}"
       elif [ "${MESSAGE}" = "/ml_server_run" ]; then
         $(etherwake -i br-lan 00:F1:F3:D6:00:7D)
-        send_message "${CHAT_ID}" "...send magic packadge to ml_server"
+        send_message "${CHAT_ID}" "✅send magic packadge to ml_server"
       elif [ "${MESSAGE}" = "/ml_server_stop" ]; then
         $(sshpass -p "iamfriend" ssh -y sp@192.168.31.181 "shutdown.exe /s")
-        send_message "${CHAT_ID}" "...shutdown ml_server"
+        send_message "${CHAT_ID}" "❌shutdown ml_server"
       elif [ "${MESSAGE}" = "/ml_server_cancel" ]; then
         $(sshpass -p "iamfriend" ssh -y sp@192.168.31.181 "shutdown.exe /a")
-        send_message "${CHAT_ID}" "...cancel shutdown ml_server"
+        send_message "${CHAT_ID}" "✅cancel shutdown ml_server"
+      elif [ "${MESSAGE}" = "/reboot" ]; then
+        send_message "${CHAT_ID}" "🔄reboot system"
+        $(reboot")
+      elif [ "${MESSAGE}" = "/web_open" ]; then
+        $(uci set firewall.@redirect[0].enabled='1')
+        $(uci commit firewall
+        $(/etc/init.d/firewall restart)
+        send_message "${CHAT_ID}" "✅web interface opened through internet"
+      elif [ "${MESSAGE}" = "/web_close" ]; then
+        $(uci set firewall.@redirect[0].enabled='0')
+        $(uci commit firewall
+        $(/etc/init.d/firewall restart)
+        send_message "${CHAT_ID}" "✅web interface closed"
       else
         send_message "${CHAT_ID}" "Unknown Command. Try /status or /ip."
       fi
