@@ -53,6 +53,21 @@ while true; do
         $(uci commit firewall)
         $(/etc/init.d/firewall restart)
         send_message "${CHAT_ID}" "❌web interface closed"
+      elif [ "${MESSAGE}" = "/wireguard_on" ]; then
+        $(ifup openwrt_WG)
+        $(uci set firewall.@forwarding[0].dest='wireguard')
+        $(uci commit firewall)
+        $(/etc/init.d/firewall restart)
+        send_message "${CHAT_ID}" "✅wireguard connected"
+      elif [ "${MESSAGE}" = "/wireguard_off" ]; then
+        send_message "${CHAT_ID}" "❌wireguard disconnected"
+        $(ifdown openwrt_WG)
+        $(ifdown dom)
+        $(sleep 1)
+        $(ifup dom)
+        $(uci set firewall.@forwarding[0].dest='wan')
+        $(uci commit firewall)
+        $(/etc/init.d/firewall restart)
       else
         send_message "${CHAT_ID}" "Unknown Command. Try /status or /ip."
       fi
