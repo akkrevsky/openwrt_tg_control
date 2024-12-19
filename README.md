@@ -32,6 +32,18 @@ Steps:
    ```
 10. Сlear log (reboot or auto-script)
 
+Botfather commands:
+status - status OpenWrt
+reboot - reboot system
+ip - get public ipV4
+wireguard_on - wireguard on
+wireguard_off - wireguard off
+web_open - open web interface
+web_close - close web interface
+ml_server_run - run ml server
+ml_server_stop - shutdown ml server
+ml_server_cancel - cancel shutdown ml server (1min)
+
 TODO: 
    - get all information about all nodes in network
    - add startups message
